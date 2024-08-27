@@ -4,8 +4,12 @@ echo -e "Cleaning previous builds and binaries :: \n"
 
 ./scripts/clean.sh
 
-mkdir -p build build/linux build/windows
+echo -e "Building binaries :: \n"
 
-cmake -S . -B build/linux
+echo -e "Building binary for Linux :: \n"
 
-cmake -DCMAKE_TOOLCHAIN_FILE=mingw-toolchain.cmake -S . -B build/windows
+cmake -S . -B build/Linux
+
+echo -e "Building binary for Windows :: \n"
+
+cmake -DCMAKE_TOOLCHAIN_FILE=mingw-toolchain.cmake -S . -B build/Windows

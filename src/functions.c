@@ -7,7 +7,15 @@
  * The text is given a default movement of 1 in both the x and y directions.
  */
 
-void initialize_text_object(TEXT* text, char* string, uint8_t font_size, uint16_t WIN_WIDTH, uint16_t WIN_HEIGHT)  {
+
+void init_window_data(WINDOW* win) {
+    win->X = 1500;
+    win->Y = 1000;
+    win->CX = win->X/2;
+    win->CY = win->Y/2;
+}
+
+void init_text_object(TEXT* text, char* string, uint8_t font_size, WINDOW win)  {
     text->val = string;
     text->length = strlen(string);
     text->X_change = 1;
@@ -15,9 +23,9 @@ void initialize_text_object(TEXT* text, char* string, uint8_t font_size, uint16_
     text->font_size = font_size;
     text->text_bound_x = MeasureText(text->val, text->font_size);
     text->text_bound_y = text->font_size;
-    text->current_X1 = ((WIN_WIDTH - WIN_WIDTH/2) - text->text_bound_x/2);
+    text->current_X1 = (win.CX - text->text_bound_x/2);
     text->current_X2 = text->current_X1 + text->text_bound_x;
-    text->current_Y1 =((WIN_HEIGHT - WIN_HEIGHT/2) - text->text_bound_y/2);
+    text->current_Y1 =(win.CY - text->text_bound_y/2);
     text->current_Y2 = text->current_Y1 + text->text_bound_y;
 }
 
@@ -35,3 +43,15 @@ void print_text_object(TEXT* text) {
     printf("current_Y1: %d\n", text->current_Y1);
     printf("current_Y2: %d\n", text->current_Y2);
 }
+
+
+void init_rectangle(RectangleData* rect, CoOrdinate coor, WINDOW win) {
+    // code
+}
+
+
+ void print_font_meta(Font* font) {
+
+    printf("Base Size :: %d\n", font->baseSize);
+
+ }
