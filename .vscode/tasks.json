@@ -1,0 +1,28 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Cpp Project",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/build.sh",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Compile Cpp Project",
+            "type": "shell",
+            "command": "${workspaceFolder}/scripts/make.sh",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Run Cpp Project",
+            "type": "shell",
+            "command": "${workspaceFolder}/bin/Linux/RAYLIB_APP_MK_I_linux"
+        }
+    ]
+}

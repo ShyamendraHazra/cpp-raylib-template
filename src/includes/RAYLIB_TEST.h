@@ -1,18 +1,19 @@
 #ifndef RAYLIB_TEST_H
 #define RAYLIB_TEST_H
 
-#include "common.h"
-#include "Test.h"
+#include "std.h"
 
 
-     
+    using std::string;
+
     // This header file contains all of the API wrapper data structures and function declarations (prototypes)
     
     /* WINDOW struct used to define and store open window data */
     typedef struct {
 
-        float WinHeight;
-        float WinWidth;
+        float height;
+        float width;
+        const char* title;
 
     } WINDOW;
 
@@ -21,52 +22,69 @@
     typedef struct {
         char* text;
         Font font;
-        Color color;
     } Text;                                       // DS for Rendering texts on the screen
 
-    /* OBJMETADATA (OBJECT META DATA) will contain state and position of the object within the window */
-
     typedef struct {
-        Vector2 objStartingPos;                    // The position on screen in the Window from where the object will be drawn
-        bool objMovementState;                     // boolean value to track if the object is static or moving object
-        Vector2 objMovementSpeed;                  // The movement speed of object if it is a moving object
-    } OBJMETADATA;
+        
+    } Line;                                       // DS for Rendering lines on the screen
+
+
+    // SHAPE_ID enum is used to identify the shape type
 
     typedef enum {
         TEXT,
+        LINE,
         RECTANGLE,
         CIRCLE,
-        ELLIPSE,
         RING,
-        LINE
+        ELLIPSE,
+        TRIANGLE,
+        POLYGON
     } SHAPE_ID;
     
-    // typedef union {
-    //     Line* shape;
-    //     Rectangle* shape;
-    //     Circle* shape;
-    //     Ellipse* shape;
-    //     Triangle* shape;
-    //     Polygon* shape;
-    // } objRef;
+    //  objRef contains a pointer to the shape
 
-    // typedef struct {
-    //     SHAPE_ID id;
-    //     objRef obj;
-    //     OBJMETADATA meta;
-    // } SHAPE;
+    typedef union {
+        Text* text;
+        Line* line;
+        Rectangle* rectangle;
+        // Circle* cirlce;
+        // Ring* ring;
+        // Ellipse* ellipse;
+        // Triangle* triangle;
+        // Polygon* polygon;
+    } SHAPE_REF;
 
-    // typedef struct {
-    //     ELEMENT* this;
-    //     SHAPE obj;
-    //     SHAPEFUNC func;
-    // } ELEMENT;
+    // OBJMETADATA contains the metadata of the object 
 
-    // typedef struct {
-    //     void (*initElement)(ELEMENT* elem, SHAPE_ID objType);
-    //     void (*printElementToSTDO)(ELEMENT* elem);
-    //     void (*printElementToScreen)(ELEMENT* elem);
-    // } SHAPEFUNC;
+    typedef struct {
+        Vector2 objStartingPos;
+        Vector2 objDimensions;
+        Vector2 objCurrentPos;
+        Color objColor;
+        bool objMovementState;
+        Vector2 objMovementSpeed;
+    } OBJ_META_DATA;
+
+    typedef struct {
+        SHAPE_ID id;
+        SHAPE_REF obj;
+        OBJ_META_DATA meta_data;
+    } SHAPE;
+
+    struct ELEMENT;
+    
+    typedef struct {
+        void (*initElement) (ELEMENT* elem, SHAPE_ID objType);
+        void (*printElementToSTDO) (ELEMENT* elem);
+        void (*printElementToScreen) (ELEMENT* elem);
+    } SHAPEFUNC;
+
+    typedef struct ELEMENT {
+        SHAPE obj;
+        SHAPEFUNC func;
+    } ELEMENT;
+
 
 
 

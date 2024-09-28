@@ -1,6 +1,9 @@
 # Specify the minimum CMake version required to build the project
 cmake_minimum_required(VERSION 3.10)
 
+# Enable parallel building
+set(CMAKE_BUILD_PARALLEL_LEVEL ${NUMBER_OF_PROCESSORS})
+
 # Define the project name and the languages used (C and C++)
 project(RAYLIB_APP_MK_I C CXX)
 
@@ -50,11 +53,25 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 
     # Add custom command to copy DLL files after the build
     add_custom_command(TARGET RAYLIB_APP_MK_I_win POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        /usr/x86_64-w64-mingw32/bin/libraylib.dll
-        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    /usr/x86_64-w64-mingw32/bin/libraylib.dll
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+    
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
         /usr/x86_64-w64-mingw32/bin/libssp-0.dll
+        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        /usr/x86_64-w64-mingw32/bin/libstdc++-6.dll
+        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+    
+    
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        /usr/x86_64-w64-mingw32/bin/libgcc_s_seh-1.dll
+        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+    
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        /usr/x86_64-w64-mingw32/bin/libwinpthread-1.dll
         ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
     )
 
