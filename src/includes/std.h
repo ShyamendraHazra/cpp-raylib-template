@@ -2,8 +2,10 @@
 #define STD_H
 
 #include <raylib.h>
-#include <string>
 #include <iostream>
+#include <string>
+#include <functional>
+#include <cmath>
 #include <cstdint>
 
 #endif

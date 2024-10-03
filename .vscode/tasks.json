@@ -23,6 +23,14 @@
             "label": "Run Cpp Project",
             "type": "shell",
             "command": "${workspaceFolder}/bin/Linux/RAYLIB_APP_MK_I_linux"
+        },
+        {
+            "label": "Compile and Run Cpp Project",
+            "type": "shell",
+            "command" : "\"${workspaceFolder}\"/scripts/make.sh && \"${workspaceFolder}\"/bin/Linux/RAYLIB_APP_MK_I_linux",
+            "problemMatcher": [
+                "$gcc"
+            ]
         }
     ]
 }
