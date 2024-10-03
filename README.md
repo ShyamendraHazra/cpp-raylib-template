@@ -18,4 +18,4 @@
 
 ## ::[Note]:: ---
 
-#### For the compiled executable to run on windows libssp-0.dll and libraylib.dll must remain under the same parent directory of the executable  
+#### All the neccesary libs and dlls will be attached or linked with the final executables automatically
